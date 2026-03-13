@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
 
@@ -261,7 +261,7 @@ function FormPage() {
         if (!validate()) return;
 
         try {
-            const response = await fetch("http://localhost:5000/api/createCustomer", {
+            const response = await fetch("https://energy-switch-platform-3.onrender.com/api/createCustomer", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
