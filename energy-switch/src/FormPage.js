@@ -43,7 +43,7 @@ function FormPage({ onSuccess }) {
         try {
             setLoading(true);
 
-            const response = await fetch("http://localhost:5000/api/createCustomer", {
+            const response = await fetch("https://energy-switch-platform-6.onrender.com/api/createCustomer", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
