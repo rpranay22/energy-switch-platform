@@ -1,21 +1,28 @@
 const { Sequelize } = require("sequelize");
-require("dotenv").config();
 
 const sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
+    process.env.DB_NAME || "defaultdb",
+    process.env.DB_USER || "avnadmin",
+    process.env.DB_PASSWORD || "YOUR_DB_PASSWORD",
     {
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT,
+        host:
+            process.env.DB_HOST ||
+            "mysql-311e2d6c-pranayreddy123-db51.f.aivencloud.com",
+        port: process.env.DB_PORT || 28655,
         dialect: "mysql",
         dialectOptions: {
             ssl: {
                 require: true,
-                rejectUnauthorized: false
-            }
+                rejectUnauthorized: false,
+            },
         },
-        logging: false
+        pool: {
+            max: 5,
+            min: 0,
+            acquire: 30000,
+            idle: 10000,
+        },
+        logging: false,
     }
 );
 

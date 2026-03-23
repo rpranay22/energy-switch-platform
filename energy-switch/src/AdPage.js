@@ -1,26 +1,24 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import "./styles.css";
 
-function AdPage() {
-    const navigate = useNavigate();
-
+function AdPage({ onSwitch }) {
     return (
         <div className="ad-container">
             <div className="ad-card">
-                <h1>⚡ Switch to Us & Save Electricity</h1>
-                <p>
-                    Join smart customers and lower your electricity bills with better
-                    energy plans and smart automation.
+                <div className="badge">Smart Electricity Switching</div>
+
+                <h1>⚡ Switch to Us & Save on Electricity</h1>
+
+                <p className="ad-subtitle">
+                    Make your electricity smarter with dynamic pricing, easier switching,
+                    and a simpler onboarding experience.
                 </p>
 
-                <ul>
-                    <li>💡 Save on your monthly bill</li>
-                    <li>📊 Smarter energy usage</li>
-                    <li>🌍 Better for your home and the planet</li>
-                </ul>
+                <div className="ad-features">
+                    <div className="feature-box">💡 Save up to 30% on bills</div>
+                    <div className="feature-box">📊 Smarter energy management</div>
+                    <div className="feature-box">🌍 Cleaner, efficient usage</div>
+                </div>
 
-                <button className="switch-btn" onClick={() => navigate("/form")}>
+                <button className="switch-btn" onClick={onSwitch}>
                     Switch to Us
                 </button>
             </div>
