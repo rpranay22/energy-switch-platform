@@ -230,7 +230,7 @@ function FormPage({ onSuccess }) {
                         </select>
                     </div>
 
-                    <button type="submit" className="submit-btn" disabled={loading}>
+                    <button type="submit" className="submit-btn premium-btn" disabled={loading}>
                         {loading ? "Submitting..." : "Submit Application"}
                     </button>
                 </form>

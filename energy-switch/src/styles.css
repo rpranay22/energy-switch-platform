@@ -431,3 +431,151 @@ select {
     font-size: 14px;
     color: #374151;
 }
+
+/* GLOBAL BACKGROUND */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f0fdfa, #ccfbf1);
+}
+
+/* MAIN CONTAINER */
+.app-container {
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* CARD / FORM BOX */
+.form-container {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    max-width: 700px;
+    margin: auto;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* HEADINGS */
+h1,
+h2,
+h3 {
+    color: #0f766e;
+}
+
+/* INPUT FIELDS */
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    margin-bottom: 14px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+}
+
+/* BUTTONS */
+button {
+    background: linear-gradient(135deg, #0ea5a4, #0f766e);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.chatbot-header {
+    background: linear-gradient(135deg, #0ea5a4, #0f766e);
+    color: white;
+}
+
+.chat-toggle-btn {
+    background: linear-gradient(135deg, #0ea5a4, #0f766e);
+}
+
+.chat-toggle-btn {
+    background: linear-gradient(135deg, #0ea5a4, #0f766e);
+}
+
+.chat-toggle-btn {
+    background: linear-gradient(135deg, #0ea5a4, #0f766e);
+}
+
+.success-container {
+    text-align: center;
+    padding: 40px;
+    color: #0f766e;
+}
+
+.success-container h2 {
+    color: #0ea5a4;
+}
+
+.faq-toggle-btn {
+    background: linear-gradient(135deg, #0ea5a4, #0f766e);
+}
+
+.faq-header {
+    background: linear-gradient(135deg, #0ea5a4, #0f766e);
+}
+
+.switch-btn {
+    background: linear-gradient(135deg, #0ea5a4, #0f766e);
+    position: relative;
+    overflow: hidden;
+}
+
+.switch-btn::after {
+    content: "";
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background: rgba(255, 255, 255, 0.2);
+    top: -50%;
+    left: -50%;
+    transform: rotate(25deg);
+    transition: 0.5s;
+}
+
+.switch-btn:hover::after {
+    left: 100%;
+}
+
+.premium-btn {
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    color: white;
+
+    background: linear-gradient(135deg, #0ea5a4, #0f766e);
+
+    box-shadow: 0 8px 20px rgba(14, 165, 164, 0.35);
+
+    transition: all 0.3s ease;
+}
+
+/* Hover */
+.premium-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(14, 165, 164, 0.5);
+}
+
+/* Click effect */
+.premium-btn:active {
+    transform: scale(0.97);
+}
+
+/* Disabled state */
+.premium-btn:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+    box-shadow: none;
+}
