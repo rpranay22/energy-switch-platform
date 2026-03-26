@@ -85,7 +85,7 @@ function Chatbot() {
                     <div className="chatbot-header">
                         <div>
                             <h3>AI Onboarding Assistant</h3>
-                            <p>Always available across the app</p>
+
                         </div>
                         <button className="close-btn" onClick={() => setIsOpen(false)}>
                             ✕
