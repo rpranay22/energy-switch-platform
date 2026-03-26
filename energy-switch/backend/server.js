@@ -11,7 +11,10 @@ const app = express();
 
 app.use(cors());
 app.use(cors({
-    origin: "https://energy-switch-platform-5.onrender.com"
+    origin: [
+        "https://energy-switch-platform-5.onrender.com",
+        "https://strong-figolla-d614b5.netlify.app"
+    ]
 }));
 app.use(express.json());
 
