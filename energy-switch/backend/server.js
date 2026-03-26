@@ -10,6 +10,9 @@ const chatRoutes = require("./routes/chatRoutes");
 const app = express();
 
 app.use(cors());
+app.use(cors({
+    origin: "https://energy-switch-platform-5.onrender.com"
+}));
 app.use(express.json());
 
 app.get("/", (req, res) => {
