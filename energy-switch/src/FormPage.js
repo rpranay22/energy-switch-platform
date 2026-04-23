@@ -176,7 +176,7 @@ function FormPage({ onSuccess }) {
                         />
                     </div>
 
-                    <div className="field-group">
+                    {/* <div className="field-group">
                         <label>Meter Number</label>
                         <input
                             type="text"
@@ -185,7 +185,7 @@ function FormPage({ onSuccess }) {
                             onChange={handleChange}
                             placeholder="Enter meter number"
                         />
-                    </div>
+                    </div> */}
 
                     <div className="field-group">
                         <label>Current Meter Reading</label>
