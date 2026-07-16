@@ -3,37 +3,55 @@ import AdPage from "./AdPage";
 import Chatbot from "./Chatbot";
 import FaqWidget from "./FaqWidget";
 import FormPage from "./FormPage";
-import "./styles.css";
 import SuccessPage from "./SuccessPage";
+import "./styles.css";
 
 function App() {
-  const [currentPage, setCurrentPage] = useState("ad");
-  const [submittedCustomer, setSubmittedCustomer] = useState(null);
+  const [currentPage, setCurrentPage] =
+    useState("ad");
+
+  const [
+    submittedCustomer,
+    setSubmittedCustomer,
+  ] = useState(null);
+
+  const openFormPage = () => {
+    setCurrentPage("form");
+  };
+
+  const handleSuccessfulSubmission = (
+    customerData
+  ) => {
+    setSubmittedCustomer(customerData);
+    setCurrentPage("success");
+  };
+
+  const returnToHome = () => {
+    setSubmittedCustomer(null);
+    setCurrentPage("ad");
+  };
 
   return (
     <div>
       {currentPage === "ad" && (
-        <AdPage onSwitch={() => setCurrentPage("form")} />
+        <AdPage onSwitch={openFormPage} />
       )}
 
       {currentPage === "form" && (
         <FormPage
-          onSuccess={(customerData) => {
-            setSubmittedCustomer(customerData);
-            setCurrentPage("success");
-          }}
+          onSuccess={
+            handleSuccessfulSubmission
+          }
         />
       )}
 
-      {currentPage === "success" && (
-        <SuccessPage
-          customer={submittedCustomer}
-          onBackHome={() => {
-            setSubmittedCustomer(null);
-            setCurrentPage("ad");
-          }}
-        />
-      )}
+      {currentPage === "success" &&
+        submittedCustomer && (
+          <SuccessPage
+            customer={submittedCustomer}
+            onBackHome={returnToHome}
+          />
+        )}
 
       <Chatbot />
       <FaqWidget />

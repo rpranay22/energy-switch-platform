@@ -579,3 +579,13 @@ button:hover {
     cursor: not-allowed;
     box-shadow: none;
 }
+
+.form-error-message {
+    margin: 0 0 20px;
+    padding: 13px 15px;
+    border: 1px solid #fecaca;
+    border-radius: 10px;
+    background: #fef2f2;
+    color: #b91c1c;
+    font-size: 14px;
+}
