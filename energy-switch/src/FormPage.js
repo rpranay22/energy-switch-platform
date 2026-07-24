@@ -64,7 +64,7 @@ function FormPage({ onSuccess }) {
               has the POST /api/customers route.
             */
             const response = await fetch(
-                "http://localhost:5002/api/createCustomer",
+                "https://ui-dev-backend.onrender.com/api/createCustomer",
                 {
                     method: "POST",
                     headers: {

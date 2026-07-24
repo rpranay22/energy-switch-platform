@@ -38,7 +38,7 @@ function Chatbot() {
         setLoading(true);
 
         try {
-            const response = await fetch("https://energy-switch-platform-6.onrender.com/api/chat", {
+            const response = await fetch("https://ui-dev-backend.onrender.com/api/chat", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
