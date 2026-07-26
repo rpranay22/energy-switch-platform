@@ -1,17 +1,21 @@
 const express = require("express");
+const bcrypt = require("bcryptjs");
 const { Op } = require("sequelize");
+
+
+const sequelize = require("../config/database"); // <-- Change this path if needed
 const Customer = require("../models/Customer");
+const User = require("../models/User");
 
 const router = express.Router();
 
 function removeSensitiveFields(customer) {
     const result = customer.toJSON();
-
     delete result.passwordHash;
-
     return result;
 }
 
+// Create Customer
 router.post("/createCustomer", async (req, res) => {
     const transaction = await sequelize.transaction();
 
@@ -66,41 +70,41 @@ router.post("/createCustomer", async (req, res) => {
             { transaction }
         );
 
-        // Generate a temporary password
+        // Temporary password
         const temporaryPassword = "Temp@12345";
 
-        // Hash password
-        const passwordHash = await bcrypt.hash(temporaryPassword, 10);
-
-        // Create user
-        await User.create(
-            {
-                id: uuidv4(),
-                email: req.body.email,
-                password_hash: passwordHash,
-                status: "active",
-            },
-            { transaction }
+        const passwordHash = await bcrypt.hash(
+            temporaryPassword,
+            10
         );
+
+        await User.create({
+            email: req.body.email,
+            password_hash: passwordHash,
+            status: "active",
+        }, { transaction });
 
         await transaction.commit();
 
         return res.status(201).json({
             message: "Lead and user created successfully",
-            temporaryPassword, // Remove this in production
+            temporaryPassword, // Remove in production
             data: removeSensitiveFields(customer),
         });
     } catch (error) {
-        await transaction.rollback();
+        if (transaction) {
+            await transaction.rollback();
+        }
 
         console.error("Create lead error:", error);
 
-        return res.status(400).json({
+        return res.status(500).json({
             error: error.message,
         });
     }
 });
 
+// Get Customers
 router.get("/customers", async (req, res) => {
     try {
         const {
@@ -163,16 +167,13 @@ router.get("/customers", async (req, res) => {
 
         const customers = await Customer.findAll({
             where,
-            attributes: {
-                exclude: ["passwordHash"],
-            },
             order: [["createdAt", "DESC"]],
         });
 
         return res.json({
             totalCustomers,
             returnedCount: customers.length,
-            data: customers,
+            data: customers.map(removeSensitiveFields),
         });
     } catch (error) {
         console.error("Get customers error:", error);
