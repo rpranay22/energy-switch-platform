@@ -13,41 +13,86 @@ function removeSensitiveFields(customer) {
 }
 
 router.post("/createCustomer", async (req, res) => {
+    const transaction = await sequelize.transaction();
+
     try {
         const existingCustomer = await Customer.findOne({
             where: {
                 email: req.body.email,
             },
+            transaction,
         });
 
         if (existingCustomer) {
+            await transaction.rollback();
+
             return res.status(409).json({
                 error: "A customer with this email already exists.",
             });
         }
 
-        const customer = await Customer.create({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            phone: req.body.phone,
-            eircode: req.body.eircode,
-            address: req.body.address || null,
-            provider: req.body.provider,
-            mprn: req.body.mprn,
-            meterNumber: req.body.meterNumber || null,
-            meterReading: req.body.meterReading || null,
-            paymentMethod: req.body.paymentMethod || null,
-            preferredContactTime:
-                req.body.preferredContactTime || null,
-            status: "LEAD",
+        const existingUser = await User.findOne({
+            where: {
+                email: req.body.email,
+            },
+            transaction,
         });
 
+        if (existingUser) {
+            await transaction.rollback();
+
+            return res.status(409).json({
+                error: "A user with this email already exists.",
+            });
+        }
+
+        const customer = await Customer.create(
+            {
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                phone: req.body.phone,
+                eircode: req.body.eircode,
+                address: req.body.address || null,
+                provider: req.body.provider,
+                mprn: req.body.mprn,
+                meterNumber: req.body.meterNumber || null,
+                meterReading: req.body.meterReading || null,
+                paymentMethod: req.body.paymentMethod || null,
+                preferredContactTime:
+                    req.body.preferredContactTime || null,
+                status: "LEAD",
+            },
+            { transaction }
+        );
+
+        // Generate a temporary password
+        const temporaryPassword = "Temp@12345";
+
+        // Hash password
+        const passwordHash = await bcrypt.hash(temporaryPassword, 10);
+
+        // Create user
+        await User.create(
+            {
+                id: uuidv4(),
+                email: req.body.email,
+                password_hash: passwordHash,
+                status: "active",
+            },
+            { transaction }
+        );
+
+        await transaction.commit();
+
         return res.status(201).json({
-            message: "Lead created successfully",
+            message: "Lead and user created successfully",
+            temporaryPassword, // Remove this in production
             data: removeSensitiveFields(customer),
         });
     } catch (error) {
+        await transaction.rollback();
+
         console.error("Create lead error:", error);
 
         return res.status(400).json({
