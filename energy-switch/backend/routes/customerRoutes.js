@@ -103,6 +103,31 @@ router.post("/createCustomer", async (req, res) => {
         });
     }
 });
+router.get("/user", async (req, res) => {
+    try {
+        const { email } = req.query;
+        if (!email) {
+            return res.status(400).json({
+                error: "Email is required.",
+            });
+        }
+        const user = await User.findOne({
+            where: { email },
+            attributes: { exclude: ["password_hash"] },
+        });
+        if (!user) {
+            return res.status(404).json({
+                error: "User not found.",
+            });
+        }
+        return res.json({ data: user });
+    } catch (error) {
+        console.error("Get user error:", error);
+        return res.status(500).json({
+            error: error.message,
+        });
+    }
+});
 
 // Get Customers
 router.get("/customers", async (req, res) => {
