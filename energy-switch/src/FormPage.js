@@ -1,4 +1,48 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { getFieldExplanation } from "./fieldExplanations";
+
+function FieldHelp({ fieldId, openId, setOpenId }) {
+    const helpRef = useRef(null);
+    const isOpen = openId === fieldId;
+    const explanation = getFieldExplanation(fieldId);
+
+    useEffect(() => {
+        if (!isOpen) {
+            return undefined;
+        }
+
+        const handleClickOutside = (event) => {
+            if (helpRef.current && !helpRef.current.contains(event.target)) {
+                setOpenId(null);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isOpen, setOpenId]);
+
+    return (
+        <span className="field-help" ref={helpRef}>
+            <button
+                type="button"
+                className="field-help-btn"
+                aria-label={`Explain ${fieldId}`}
+                onClick={() => setOpenId(isOpen ? null : fieldId)}
+            >
+                ?
+            </button>
+
+            {isOpen && (
+                <span className="field-help-popup" role="tooltip">
+                    {explanation}
+                </span>
+            )}
+        </span>
+    );
+}
 
 function FormPage({ onSuccess }) {
     const [formData, setFormData] = useState({
@@ -18,6 +62,7 @@ function FormPage({ onSuccess }) {
 
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [openHelpId, setOpenHelpId] = useState(null);
 
     const providers = [
         "Electric Ireland",
@@ -137,6 +182,11 @@ function FormPage({ onSuccess }) {
                     <div className="field-group">
                         <label htmlFor="firstName">
                             First Name *
+                            <FieldHelp
+                                fieldId="firstName"
+                                openId={openHelpId}
+                                setOpenId={setOpenHelpId}
+                            />
                         </label>
 
                         <input
@@ -154,6 +204,11 @@ function FormPage({ onSuccess }) {
                     <div className="field-group">
                         <label htmlFor="lastName">
                             Last Name *
+                            <FieldHelp
+                                fieldId="lastName"
+                                openId={openHelpId}
+                                setOpenId={setOpenHelpId}
+                            />
                         </label>
 
                         <input
@@ -171,6 +226,11 @@ function FormPage({ onSuccess }) {
                     <div className="field-group">
                         <label htmlFor="email">
                             Email *
+                            <FieldHelp
+                                fieldId="email"
+                                openId={openHelpId}
+                                setOpenId={setOpenHelpId}
+                            />
                         </label>
 
                         <input
@@ -188,6 +248,11 @@ function FormPage({ onSuccess }) {
                     <div className="field-group">
                         <label htmlFor="phone">
                             Phone Number *
+                            <FieldHelp
+                                fieldId="phone"
+                                openId={openHelpId}
+                                setOpenId={setOpenHelpId}
+                            />
                         </label>
 
                         <input
@@ -205,6 +270,11 @@ function FormPage({ onSuccess }) {
                     <div className="field-group">
                         <label htmlFor="eircode">
                             Eircode *
+                            <FieldHelp
+                                fieldId="eircode"
+                                openId={openHelpId}
+                                setOpenId={setOpenHelpId}
+                            />
                         </label>
 
                         <input
@@ -222,6 +292,11 @@ function FormPage({ onSuccess }) {
                     <div className="field-group">
                         <label htmlFor="address">
                             Address
+                            <FieldHelp
+                                fieldId="address"
+                                openId={openHelpId}
+                                setOpenId={setOpenHelpId}
+                            />
                         </label>
 
                         <input
@@ -238,6 +313,11 @@ function FormPage({ onSuccess }) {
                     <div className="field-group">
                         <label htmlFor="provider">
                             Current Electricity Provider *
+                            <FieldHelp
+                                fieldId="provider"
+                                openId={openHelpId}
+                                setOpenId={setOpenHelpId}
+                            />
                         </label>
 
                         <select
@@ -265,6 +345,11 @@ function FormPage({ onSuccess }) {
                     <div className="field-group">
                         <label htmlFor="mprn">
                             MPRN *
+                            <FieldHelp
+                                fieldId="mprn"
+                                openId={openHelpId}
+                                setOpenId={setOpenHelpId}
+                            />
                         </label>
 
                         <input
@@ -281,6 +366,11 @@ function FormPage({ onSuccess }) {
                     <div className="field-group">
                         <label htmlFor="meterNumber">
                             Meter Number
+                            <FieldHelp
+                                fieldId="meterNumber"
+                                openId={openHelpId}
+                                setOpenId={setOpenHelpId}
+                            />
                         </label>
 
                         <input
@@ -296,6 +386,11 @@ function FormPage({ onSuccess }) {
                     <div className="field-group">
                         <label htmlFor="meterReading">
                             Current Meter Reading
+                            <FieldHelp
+                                fieldId="meterReading"
+                                openId={openHelpId}
+                                setOpenId={setOpenHelpId}
+                            />
                         </label>
 
                         <input
@@ -311,6 +406,11 @@ function FormPage({ onSuccess }) {
                     <div className="field-group">
                         <label htmlFor="paymentMethod">
                             Payment Method
+                            <FieldHelp
+                                fieldId="paymentMethod"
+                                openId={openHelpId}
+                                setOpenId={setOpenHelpId}
+                            />
                         </label>
 
                         <select
@@ -337,6 +437,11 @@ function FormPage({ onSuccess }) {
                     <div className="field-group">
                         <label htmlFor="preferredContactTime">
                             Preferred Contact Time
+                            <FieldHelp
+                                fieldId="preferredContactTime"
+                                openId={openHelpId}
+                                setOpenId={setOpenHelpId}
+                            />
                         </label>
 
                         <select

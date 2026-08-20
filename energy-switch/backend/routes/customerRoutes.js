@@ -1,5 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 const { Op } = require("sequelize");
 
 
@@ -70,13 +71,15 @@ router.post("/createCustomer", async (req, res) => {
             { transaction }
         );
 
-        // Temporary password
-        const temporaryPassword = "Temp@12345";
+        // Temporary password — store on Customer too so WattWatch CRM login lookup works
+        const temporaryPassword = createTemporaryPassword();
 
         const passwordHash = await bcrypt.hash(
             temporaryPassword,
             10
         );
+
+        await customer.update({ passwordHash }, { transaction });
 
         await User.create({
             email: req.body.email,
@@ -103,6 +106,12 @@ router.post("/createCustomer", async (req, res) => {
         });
     }
 });
+function createTemporaryPassword() {
+    return crypto
+        .randomBytes(12)
+        .toString("base64url")
+        .slice(0, 12);
+}
 router.get("/user", async (req, res) => {
     try {
         const { email } = req.query;
