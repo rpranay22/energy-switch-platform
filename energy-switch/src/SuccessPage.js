@@ -25,7 +25,7 @@ function SuccessPage({ customer, onBackHome }) {
                     <div><strong>Phone:</strong> {customer?.phone}</div>
                     <div><strong>Eircode:</strong> {customer?.eircode}</div>
                     <div><strong>Address:</strong> {customer?.address || "Not provided"}</div>
-                    <div><strong>Provider:</strong> {customer?.provider}</div>
+                    <div><strong>Provider:</strong> {customer?.provider || "Not provided"}</div>
                 </div>
 
                 <div className="map-wrapper">

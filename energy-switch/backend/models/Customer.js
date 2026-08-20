@@ -45,7 +45,7 @@ const Customer = sequelize.define(
 
         provider: {
             type: DataTypes.STRING(120),
-            allowNull: false,
+            allowNull: true,
         },
 
         mprn: {

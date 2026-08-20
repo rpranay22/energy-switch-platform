@@ -59,7 +59,7 @@ router.post("/createCustomer", async (req, res) => {
                 phone: req.body.phone,
                 eircode: req.body.eircode,
                 address: req.body.address || null,
-                provider: req.body.provider,
+                provider: req.body.provider || null,
                 mprn: req.body.mprn,
                 meterNumber: req.body.meterNumber || null,
                 meterReading: req.body.meterReading || null,

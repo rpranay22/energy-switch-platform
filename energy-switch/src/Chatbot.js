@@ -12,7 +12,7 @@ function Chatbot() {
     const [messages, setMessages] = useState([
         {
             sender: "bot",
-            text: "Hi! I am your onboarding assistant. Ask me about MPRN, Eircode, meter reading, switching process, or dynamic pricing.",
+            text: "Hi! I am your onboarding assistant. Ask me about MPRN, your current provider, switching, or dynamic pricing.",
         },
     ]);
     const [loading, setLoading] = useState(false);
@@ -21,8 +21,7 @@ function Chatbot() {
 
     const quickQuestions = [
         "What is MPRN?",
-        "Why do you need my Eircode?",
-        "Where do I find my meter number?",
+        "Why do you need my current provider?",
         "What is dynamic pricing?",
         "What happens after I submit?",
     ];

@@ -54,10 +54,6 @@ function FormPage({ onSuccess }) {
         address: "",
         provider: "",
         mprn: "",
-        meterNumber: "",
-        meterReading: "",
-        paymentMethod: "",
-        preferredContactTime: "",
     });
 
     const [loading, setLoading] = useState(false);
@@ -71,19 +67,6 @@ function FormPage({ onSuccess }) {
         "PrepayPower",
         "Energia",
         "Other",
-    ];
-
-    const paymentMethods = [
-        "Direct Debit",
-        "Card",
-        "Pay As You Go",
-        "Other",
-    ];
-
-    const contactTimes = [
-        "Morning",
-        "Afternoon",
-        "Evening",
     ];
 
     const handleChange = (event) => {
@@ -182,11 +165,6 @@ function FormPage({ onSuccess }) {
                     <div className="field-group">
                         <label htmlFor="firstName">
                             First Name *
-                            <FieldHelp
-                                fieldId="firstName"
-                                openId={openHelpId}
-                                setOpenId={setOpenHelpId}
-                            />
                         </label>
 
                         <input
@@ -204,11 +182,6 @@ function FormPage({ onSuccess }) {
                     <div className="field-group">
                         <label htmlFor="lastName">
                             Last Name *
-                            <FieldHelp
-                                fieldId="lastName"
-                                openId={openHelpId}
-                                setOpenId={setOpenHelpId}
-                            />
                         </label>
 
                         <input
@@ -226,11 +199,6 @@ function FormPage({ onSuccess }) {
                     <div className="field-group">
                         <label htmlFor="email">
                             Email *
-                            <FieldHelp
-                                fieldId="email"
-                                openId={openHelpId}
-                                setOpenId={setOpenHelpId}
-                            />
                         </label>
 
                         <input
@@ -248,11 +216,6 @@ function FormPage({ onSuccess }) {
                     <div className="field-group">
                         <label htmlFor="phone">
                             Phone Number *
-                            <FieldHelp
-                                fieldId="phone"
-                                openId={openHelpId}
-                                setOpenId={setOpenHelpId}
-                            />
                         </label>
 
                         <input
@@ -270,11 +233,6 @@ function FormPage({ onSuccess }) {
                     <div className="field-group">
                         <label htmlFor="eircode">
                             Eircode *
-                            <FieldHelp
-                                fieldId="eircode"
-                                openId={openHelpId}
-                                setOpenId={setOpenHelpId}
-                            />
                         </label>
 
                         <input
@@ -292,11 +250,6 @@ function FormPage({ onSuccess }) {
                     <div className="field-group">
                         <label htmlFor="address">
                             Address
-                            <FieldHelp
-                                fieldId="address"
-                                openId={openHelpId}
-                                setOpenId={setOpenHelpId}
-                            />
                         </label>
 
                         <input
@@ -312,7 +265,7 @@ function FormPage({ onSuccess }) {
 
                     <div className="field-group">
                         <label htmlFor="provider">
-                            Current Electricity Provider *
+                            Current Electricity Provider
                             <FieldHelp
                                 fieldId="provider"
                                 openId={openHelpId}
@@ -325,7 +278,6 @@ function FormPage({ onSuccess }) {
                             name="provider"
                             value={formData.provider}
                             onChange={handleChange}
-                            required
                         >
                             <option value="">
                                 Select provider
@@ -361,108 +313,6 @@ function FormPage({ onSuccess }) {
                             required
                             placeholder="Enter MPRN"
                         />
-                    </div>
-
-                    <div className="field-group">
-                        <label htmlFor="meterNumber">
-                            Meter Number
-                            <FieldHelp
-                                fieldId="meterNumber"
-                                openId={openHelpId}
-                                setOpenId={setOpenHelpId}
-                            />
-                        </label>
-
-                        <input
-                            id="meterNumber"
-                            type="text"
-                            name="meterNumber"
-                            value={formData.meterNumber}
-                            onChange={handleChange}
-                            placeholder="Enter meter number"
-                        />
-                    </div>
-
-                    <div className="field-group">
-                        <label htmlFor="meterReading">
-                            Current Meter Reading
-                            <FieldHelp
-                                fieldId="meterReading"
-                                openId={openHelpId}
-                                setOpenId={setOpenHelpId}
-                            />
-                        </label>
-
-                        <input
-                            id="meterReading"
-                            type="text"
-                            name="meterReading"
-                            value={formData.meterReading}
-                            onChange={handleChange}
-                            placeholder="Enter meter reading"
-                        />
-                    </div>
-
-                    <div className="field-group">
-                        <label htmlFor="paymentMethod">
-                            Payment Method
-                            <FieldHelp
-                                fieldId="paymentMethod"
-                                openId={openHelpId}
-                                setOpenId={setOpenHelpId}
-                            />
-                        </label>
-
-                        <select
-                            id="paymentMethod"
-                            name="paymentMethod"
-                            value={formData.paymentMethod}
-                            onChange={handleChange}
-                        >
-                            <option value="">
-                                Select payment method
-                            </option>
-
-                            {paymentMethods.map((method) => (
-                                <option
-                                    key={method}
-                                    value={method}
-                                >
-                                    {method}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-
-                    <div className="field-group">
-                        <label htmlFor="preferredContactTime">
-                            Preferred Contact Time
-                            <FieldHelp
-                                fieldId="preferredContactTime"
-                                openId={openHelpId}
-                                setOpenId={setOpenHelpId}
-                            />
-                        </label>
-
-                        <select
-                            id="preferredContactTime"
-                            name="preferredContactTime"
-                            value={formData.preferredContactTime}
-                            onChange={handleChange}
-                        >
-                            <option value="">
-                                Select preferred contact time
-                            </option>
-
-                            {contactTimes.map((time) => (
-                                <option
-                                    key={time}
-                                    value={time}
-                                >
-                                    {time}
-                                </option>
-                            ))}
-                        </select>
                     </div>
 
                     <button

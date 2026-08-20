@@ -32,35 +32,15 @@ const extraAnswers = [
             "Your MPRN is an 11-digit number on your electricity bill, usually near the supply address. We need it to switch the correct electricity connection.",
     },
     {
-        keywords: ["where do i find meter number", "find my meter", "where is meter number"],
-        answer:
-            "Your meter number is printed on the physical meter and often also appears on your bill. We use it as a check that we have the right meter. The MPRN is still the number required to complete the switch.",
-    },
-    {
-        keywords: ["difference between meter", "meter number and mprn", "mprn vs"],
-        answer:
-            "MPRN identifies your electricity connection on the network and is required to switch. The meter number identifies the physical meter at your property. We collect the meter number as a check; we collect the MPRN to process the transfer.",
-    },
-    {
         keywords: ["electricity bill", "need my bill"],
         answer:
-            "A recent electricity bill is useful because it usually has your MPRN, Eircode, meter number, and account name. We collect those details so we can switch the correct account and property.",
+            "A recent electricity bill is useful because it usually has your MPRN, Eircode, and account name. Those details help us switch the correct account and property.",
     },
 ];
 
 const fieldKeywordMap = [
-    { id: "firstName", keywords: ["first name"] },
-    { id: "lastName", keywords: ["last name", "surname"] },
-    { id: "email", keywords: ["email"] },
-    { id: "phone", keywords: ["phone", "mobile", "contact number"] },
-    { id: "eircode", keywords: ["eircode", "eir code", "postcode", "post code"] },
-    { id: "address", keywords: ["address"] },
     { id: "provider", keywords: ["provider", "supplier", "current electricity"] },
     { id: "mprn", keywords: ["mprn", "meter point"] },
-    { id: "meterNumber", keywords: ["meter number", "meter serial"] },
-    { id: "meterReading", keywords: ["meter reading", "reading"] },
-    { id: "paymentMethod", keywords: ["payment", "direct debit", "pay as you go"] },
-    { id: "preferredContactTime", keywords: ["contact time", "preferred contact", "morning", "afternoon", "evening"] },
 ];
 
 function scoreKeywords(text, keywords) {
@@ -73,7 +53,7 @@ export function getChatReply(message) {
     const text = String(message || "").toLowerCase().trim();
 
     if (!text) {
-        return "Please type a question about the onboarding form, such as why we need your MPRN or Eircode.";
+        return "Please type a question about the onboarding form, such as why we need your MPRN or current provider.";
     }
 
     let bestAnswer = "";
@@ -102,5 +82,5 @@ export function getChatReply(message) {
         return bestAnswer;
     }
 
-    return "I can help with the onboarding form. Ask why we collect a field, such as MPRN, Eircode, meter number, meter reading, current provider, or payment method.";
+    return "I can help with the onboarding form. Ask why we collect your current provider or MPRN.";
 }
