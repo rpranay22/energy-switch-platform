@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
+const API_BASE =
+    process.env.REACT_APP_API_URL ||
+    (typeof window !== "undefined" && window.location.hostname === "localhost"
+        ? "http://localhost:5002"
+        : "https://ui-dev-backend.onrender.com");
+
 function Chatbot() {
     const [isOpen, setIsOpen] = useState(false);
     const [input, setInput] = useState("");
@@ -30,31 +36,40 @@ function Chatbot() {
     const sendMessage = async (customText = null) => {
         const text = customText || input;
 
-        if (!text.trim()) return;
+        if (!text.trim() || loading) return;
 
         const userMessage = { sender: "user", text };
-        setMessages((prev) => [...prev, userMessage]);
+        const nextMessages = [...messages, userMessage];
+
+        setMessages(nextMessages);
         setInput("");
         setLoading(true);
 
         try {
-            const response = await fetch("https://ui-dev-backend.onrender.com/api/chat", {
+            const response = await fetch(`${API_BASE}/api/chat`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ message: text }),
+                body: JSON.stringify({
+                    message: text,
+                    history: nextMessages.slice(-8).map((msg) => ({
+                        role: msg.sender === "user" ? "user" : "assistant",
+                        content: msg.text,
+                    })),
+                }),
             });
 
-            if (!response.ok) {
-                throw new Error("Failed to get chatbot response");
-            }
-
-            const data = await response.json();
+            const data = await response.json().catch(() => ({}));
 
             setMessages((prev) => [
                 ...prev,
-                { sender: "bot", text: data.reply || "Sorry, I could not answer that." },
+                {
+                    sender: "bot",
+                    text:
+                        (typeof data.reply === "string" && data.reply) ||
+                        "Sorry, Hugging Face did not return a reply.",
+                },
             ]);
         } catch (error) {
             console.error(error);
@@ -62,7 +77,7 @@ function Chatbot() {
                 ...prev,
                 {
                     sender: "bot",
-                    text: "Sorry, the chatbot service is currently unavailable.",
+                    text: "Could not reach the chat API. Start the backend and set HF_API_KEY.",
                 },
             ]);
         } finally {
@@ -85,7 +100,6 @@ function Chatbot() {
                     <div className="chatbot-header">
                         <div>
                             <h3>AI Onboarding Assistant</h3>
-
                         </div>
                         <button className="close-btn" onClick={() => setIsOpen(false)}>
                             ✕
@@ -109,6 +123,7 @@ function Chatbot() {
                                     key={index}
                                     className="quick-btn"
                                     onClick={() => sendMessage(question)}
+                                    disabled={loading}
                                 >
                                     {question}
                                 </button>
@@ -130,8 +145,11 @@ function Chatbot() {
                                     sendMessage();
                                 }
                             }}
+                            disabled={loading}
                         />
-                        <button onClick={() => sendMessage()}>Send</button>
+                        <button onClick={() => sendMessage()} disabled={loading}>
+                            Send
+                        </button>
                     </div>
                 </div>
             )}

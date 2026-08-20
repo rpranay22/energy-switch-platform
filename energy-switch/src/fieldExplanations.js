@@ -3,73 +3,73 @@ const fieldExplanations = [
         id: "firstName",
         label: "First Name",
         answer:
-            "Enter your legal first name as it appears on your electricity bill. We use this to register the switch in the correct customer name.",
+            "We collect your first name so the electricity switch is registered to the correct person and matches the name on your current account.",
     },
     {
         id: "lastName",
         label: "Last Name",
         answer:
-            "Enter your surname as it appears on your electricity account. Matching the bill name helps us complete the supplier transfer without delays.",
+            "We collect your surname so we can match your application to your existing electricity account and complete the transfer without delays.",
     },
     {
         id: "email",
         label: "Email",
         answer:
-            "Use an email address you check regularly. We send your application confirmation and switching updates here.",
+            "We collect your email to send confirmation of your application and keep you updated on the progress of your switch.",
     },
     {
         id: "phone",
         label: "Phone Number",
         answer:
-            "Provide a number we can reach you on, preferably a mobile. Our onboarding team may call or text to confirm details or next steps.",
+            "We collect your phone number so our onboarding team can contact you if we need to confirm details or arrange the next steps of your switch.",
     },
     {
         id: "eircode",
         label: "Eircode",
         answer:
-            "An Eircode is Ireland’s 7-character postcode (for example D02 AF30). It identifies your property so we switch the correct electricity connection. You can find it on your bill or at finder.eircode.ie.",
+            "We collect your Eircode to identify the exact property being switched, so supply is transferred at the right location and not a neighbouring address.",
     },
     {
         id: "address",
         label: "Address",
         answer:
-            "Enter the street address of the property you want to switch. Together with your Eircode, this confirms we are transferring supply at the right location.",
+            "We collect your address to verify the property location alongside your Eircode and to complete the supplier transfer for the correct premises.",
     },
     {
         id: "provider",
         label: "Current Electricity Provider",
         answer:
-            "Select the company that currently supplies your electricity, such as Electric Ireland or SSE Airtricity. We need this to request the transfer from the correct supplier.",
+            "We collect your current supplier so we know who to request the transfer from and can move your account to us without interrupting supply.",
     },
     {
         id: "mprn",
         label: "MPRN",
         answer:
-            "MPRN stands for Meter Point Reference Number. It is an 11-digit number that uniquely identifies your electricity connection, not the physical meter. It is printed on your bill, usually near the supply address.",
+            "We collect your MPRN because it uniquely identifies your electricity connection. We need it to switch the correct meter point with the network operator.",
     },
     {
         id: "meterNumber",
         label: "Meter Number",
         answer:
-            "This is the serial number printed on the meter itself, and it often also appears on your bill. It identifies the physical meter at your property and is different from the MPRN.",
+            "We collect your meter number to confirm the physical meter at your property, which helps us verify the connection we are switching.",
     },
     {
         id: "meterReading",
         label: "Current Meter Reading",
         answer:
-            "Enter the numbers currently shown on your electricity meter. We use this as the opening or closing reading so your old and new suppliers bill you fairly when you switch.",
+            "We collect your current meter reading so your old and new suppliers can bill you fairly from the date of the switch, with no overlap or gap.",
     },
     {
         id: "paymentMethod",
         label: "Payment Method",
         answer:
-            "Choose how you prefer to pay after switching: Direct Debit, Card, Pay As You Go, or Other. This is used to set up billing with the new supplier.",
+            "We collect your preferred payment method so we can set up billing correctly after you switch, according to how you want to pay.",
     },
     {
         id: "preferredContactTime",
         label: "Preferred Contact Time",
         answer:
-            "Choose morning, afternoon, or evening so our team can contact you at a time that suits you if we need to follow up on your application.",
+            "We collect your preferred contact time so we only call you during the part of the day that suits you if we need to follow up.",
     },
 ];
 
